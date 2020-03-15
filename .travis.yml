@@ -9,10 +9,9 @@ services:
 env:
 # https://itnext.io/how-to-run-parallel-tests-on-travis-ci-with-build-matrix-feature-4771a9e1af63
   matrix:
-    - BEATS_VERSION=7.4.2
-    - BEATS_VERSION=7.5.2
-    - BEATS_VERSION=7.6.1
-    - BEATS=filebeat
+    - BEATS_VERSION=7.4.2 BEATS=filebeat
+    - BEATS_VERSION=7.5.2 BEATS=filebeat
+    - BEATS_VERSION=7.6.1 BEATS=filebeat
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME/filebeat"
