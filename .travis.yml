@@ -3,7 +3,6 @@ dist: bionic
 os:
   - linux
 arch:
-  - amd64
   - arm64
 services:
   - docker
@@ -31,6 +30,7 @@ script:
   - ls -lah
   - tar --help
   - export TAG="${BEATS_VERSION}-${GORACH}v${GOARM}"
+  - echo ${TAG}
   # - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:${TAG}" --push .
 
 after_script:
