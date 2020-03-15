@@ -1,6 +1,17 @@
 build-args:
     tags:
         key: FROM_TAG
-        author: shokohsc
-        image: alpine-js
+        author: library
+        image: alpine
         limit: 12
+    fixed:
+        - key: BEATS_VERSION
+          values:
+            - 7.4.2
+            - 7.5.2
+            - 7.6.1
+          tag_key: beats-version
+        - key: BEATS
+          values:
+            - filebeat
+          tag_key: beats
