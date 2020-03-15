@@ -3,7 +3,7 @@ dist: bionic
 os:
   - linux
 arch:
-  - arm64
+  - amd64
 services:
   - docker
 env:
@@ -13,12 +13,12 @@ env:
     - BEATS_VERSION=7.5.2
     - BEATS_VERSION=7.6.1
     - BEATS=filebeat
-    - GOARM=7
-    - GOARCH=arm
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME/filebeat"
     - BUILDER_IMAGE="andig/beats4pi"
+    - GOARM=7
+    - GOARCH=arm
 
 before_script:
   - docker version
@@ -26,7 +26,7 @@ before_script:
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker run -v $(pwd):/build -e BEATS=${BEATS} -e BEATS_VERSION=${BEATS_VERSION} -e GOARM=${GOARM} -e GOARCH=${GOARCH} ${BUILDER_IMAGE}
+  - docker run --rm -v $(pwd):/build -e BEATS=${BEATS} -e BEATS_VERSION=${BEATS_VERSION} -e GOARM=${GOARM} -e GOARCH=${GOARCH} ${BUILDER_IMAGE}
   - ls -lah
   - tar --help
   - export TAG="${BEATS_VERSION}-${GORACH}v${GOARM}"
