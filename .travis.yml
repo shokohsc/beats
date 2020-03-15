@@ -14,7 +14,7 @@ env:
     - BEATS_VERSION=7.6.1 BEATS=filebeat
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
-    - IMAGE_NAME="$DOCKER_USERNAME/filebeat"
+    - IMAGE_NAME="$DOCKER_USERNAME/${BEATS}"
     - BUILDER_IMAGE="andig/beats4pi"
     - GOARM=7
     - GOARCH=arm
