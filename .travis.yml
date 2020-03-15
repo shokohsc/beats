@@ -29,7 +29,7 @@ script:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - docker run --rm -v $(pwd):/build -e BEATS=$BEATS -e BEATS_VERSION=$BEATS_VERSION -e GOARM=$GOARM -e GOARCH=$GOARCH $BUILDER_IMAGE
   - ls -lah
-  - tar -xvzf "filebeat-$BEATS_VERSION-linux-arm7.tar.gz"
+  - tar -xzf "filebeat-$BEATS_VERSION-linux-arm7.tar.gz"
   - export TAG=$BEATS_VERSION-${GOARCH}v$GOARM
   - export IMAGE=$IMAGE_NAME/$BEATS:$TAG
   - echo $IMAGE
