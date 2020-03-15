@@ -30,7 +30,7 @@ before_script:
   - export TAG=$BEATS_VERSION-${GOARCH}v$GOARM
   - export IMAGE=$IMAGE_NAME/$BEATS:$TAG
   - docker pull $IMAGE || true
-  - cat /etc/docker/daemon.json
+  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
 
 script:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
