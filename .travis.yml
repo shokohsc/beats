@@ -14,14 +14,14 @@ env:
     - BEATS_VERSION=7.6.1 BEATS=filebeat
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
-    - IMAGE_NAME="$DOCKER_USERNAME/${BEATS}"
+    - IMAGE_NAME="$DOCKER_USERNAME"
     - BUILDER_IMAGE="andig/beats4pi"
     - GOARM=7
     - GOARCH=arm
 
 before_script:
   - docker version
-  - docker pull "$IMAGE_NAME" || true
+  - docker pull "$IMAGE_NAME/${BEATS}" || true
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -29,10 +29,10 @@ script:
   - ls -lah
   - tar -xvzf "filebeat-${BEATS_VERSION}-linux-arm7.tar.gz"
   - export TAG="${BEATS_VERSION}-${GORACH}v${GOARM}"
-  - echo ${IMAGE_NAME}
+  - echo ${IMAGE_NAME}/${BEATS}
   - echo ${TAG}
-  - docker build --build-arg BEATS_VERSION=${BEATS_VERSION} --tag "${IMAGE_NAME}:${TAG}" .
-  - docker push "${IMAGE_NAME}:${TAG}"
+  - docker build --build-arg BEATS_VERSION=${BEATS_VERSION} --tag "${IMAGE_NAME}/${BEATS}:${TAG}" .
+  - docker push "${IMAGE_NAME}/${BEATS}:${TAG}"
 
 after_script:
   - docker images
