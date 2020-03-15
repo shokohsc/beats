@@ -1,4 +1,4 @@
-ARG BEATS_VERSION='7.4.2'
-FROM docker.elastic.co/beats/filebeat:${BEATS_VERSION}
+ARG FROM_TAG='latest'
+FROM alpine:${FROM_TAG:-latest}
 
 COPY ./ /usr/share/filebeat/
