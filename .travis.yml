@@ -8,9 +8,10 @@ arch:
 services:
   - docker
 env:
-  - BEATS_VERSION=7.4.2
-  - BEATS_VERSION=7.5.2
-  - BEATS_VERSION=7.6.1
+  matrix:
+    - BEATS_VERSION=7.4.2
+    - BEATS_VERSION=7.5.2
+    - BEATS_VERSION=7.6.1
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME/filebeat"
