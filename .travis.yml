@@ -27,10 +27,10 @@ script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker run --rm -v $(pwd):/build -e BEATS=${BEATS} -e BEATS_VERSION=${BEATS_VERSION} -e GOARM=${GOARM} -e GOARCH=${GOARCH} ${BUILDER_IMAGE}
   - ls -lah
-  - tar --help
+  - tar -xvzf "filebeat-${BEATS_VERSION}-linux-arm7.tar.gz"
   - export TAG="${BEATS_VERSION}-${GORACH}v${GOARM}"
   - echo ${TAG}
-  # - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:${TAG}" --push .
+  - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:${TAG}" --push .
 
 after_script:
   - docker images
