@@ -33,7 +33,7 @@ script:
   - export TAG=$BEATS_VERSION-${GOARCH}v$GOARM
   - export IMAGE=$IMAGE_NAME/$BEATS:$TAG
   - echo $IMAGE
-  - docker build --platform arm64 --tag $IMAGE .
+  - docker build --platform linux/arm64 --tag $IMAGE .
   - docker push $IMAGE
 
 after_script:
