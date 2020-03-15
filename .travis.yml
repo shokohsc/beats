@@ -3,7 +3,7 @@ dist: bionic
 os:
   - linux
 arch:
-  - arm64
+  - amd64
 services:
   - docker
 env:
@@ -33,7 +33,7 @@ script:
   - export TAG=$BEATS_VERSION-${GOARCH}v$GOARM
   - export IMAGE=$IMAGE_NAME/$BEATS:$TAG
   - echo $IMAGE
-  - docker build --tag $IMAGE .
+  - docker build --platform arm64 --tag $IMAGE .
   - docker push $IMAGE
 
 after_script:
