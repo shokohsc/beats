@@ -21,7 +21,9 @@ env:
 
 before_script:
   - docker version
-  - docker pull "$IMAGE_NAME/$BEATS" || true
+  - export TAG="$BEATS_VERSION-$GORACHv$GOARM"
+  - export IMAGE="$IMAGE_NAME/$BEATS:$TAG"
+  - docker pull "$IMAGE" || true
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -30,7 +32,8 @@ script:
   - tar -xvzf "filebeat-$BEATS_VERSION-linux-arm7.tar.gz"
   - export TAG="$BEATS_VERSION-$GORACHv$GOARM"
   - export IMAGE="$IMAGE_NAME/$BEATS:$TAG"
-  - docker build --build-arg BEATS_VERSION=$BEATS_VERSION --tag "$IMAGE" .
+  - echo "$IMAGE"
+  - docker build --build-arg BEATS_VERSION="$BEATS_VERSION" --tag "$IMAGE" .
   - docker push "$IMAGE"
 
 after_script:
