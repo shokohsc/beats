@@ -8,6 +8,9 @@ arch:
 services:
   - docker
 env:
+  - BEATS_VERSION=7.4.2
+  - BEATS_VERSION=7.5.2
+  - BEATS_VERSION=7.6.1
   global:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME/filebeat"
@@ -38,7 +41,7 @@ script:
   # - docker buildx build --platform="$PLATFORMS" --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME:latest" --push .
   - pwd
   - ls -lah
-  - echo "docker run -v $(pwd):/build -e BEATS=filebeat -e BEATS_VERSION=7.4.2 -e GOARM=7 -e GOARCH=arm $BUILDER_IMAGE"
+  - echo "docker run -v $(pwd):/build -e BEATS=filebeat -e BEATS_VERSION=${BEATS_VERSION} -e GOARM=7 -e GOARCH=arm ${BUILDER_IMAGE}"
   - tar --help
 
 after_script:
