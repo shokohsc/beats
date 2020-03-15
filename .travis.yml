@@ -16,8 +16,7 @@ env:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME"
     - ARM_ARCHS="linux/arm64,linux/arm/v7,linux/arm/v6"
-    - X86_ARCHS="linux/amd64,linux/386"
-    - PLATFORMS="$ARM_ARCHS,$X86_ARCHS"
+    - PLATFORMS="$ARM_ARCHS"
     - BUILDER_IMAGE="andig/beats4pi"
     - GOARCH=arm
     - GOARM=7
