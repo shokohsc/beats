@@ -29,10 +29,9 @@ script:
   - ls -lah
   - tar -xvzf "filebeat-${BEATS_VERSION}-linux-arm7.tar.gz"
   - export TAG="${BEATS_VERSION}-${GORACH}v${GOARM}"
-  - echo ${IMAGE_NAME}/${BEATS}
-  - echo ${TAG}
-  - docker build --build-arg BEATS_VERSION=${BEATS_VERSION} --tag "${IMAGE_NAME}/${BEATS}:${TAG}" .
-  - docker push "${IMAGE_NAME}/${BEATS}:${TAG}"
+  - export IMAGE="${IMAGE_NAME}/${BEATS}:${TAG}"
+  - docker build --build-arg BEATS_VERSION=${BEATS_VERSION} --tag "$IMAGE" .
+  - docker push "$IMAGE"
 
 after_script:
   - docker images
