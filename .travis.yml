@@ -16,13 +16,13 @@ env:
     - DOCKER_CLI_EXPERIMENTAL=enabled
     - IMAGE_NAME="$DOCKER_USERNAME"
     - BUILDER_IMAGE="andig/beats4pi"
-    - GOARM=7
     - GOARCH=arm
+    - GOARM=7
 
 before_script:
   - docker version
-  - export TAG="$BEATS_VERSION-$GORACHv$GOARM"
-  - export IMAGE="$IMAGE_NAME/$BEATS:$TAG"
+  - export TAG="${BEATS_VERSION}-${GORACHv}${GOARM}"
+  - export IMAGE="${IMAGE_NAME}/${BEATS}:${TAG}"
   - docker pull "$IMAGE" || true
 
 script:
@@ -30,11 +30,11 @@ script:
   - docker run --rm -v $(pwd):/build -e BEATS=$BEATS -e BEATS_VERSION=$BEATS_VERSION -e GOARM=$GOARM -e GOARCH=$GOARCH $BUILDER_IMAGE
   - ls -lah
   - tar -xvzf "filebeat-$BEATS_VERSION-linux-arm7.tar.gz"
-  - export TAG="$BEATS_VERSION-$GORACHv$GOARM"
-  - export IMAGE="$IMAGE_NAME/$BEATS:$TAG"
+  - export TAG="${BEATS_VERSION}-${GORACHv}${GOARM}"
+  - export IMAGE="${IMAGE_NAME}/${BEATS}:${TAG}"
   - echo "$IMAGE"
-  - docker build --build-arg BEATS_VERSION="$BEATS_VERSION" --tag "$IMAGE" .
-  - docker push "$IMAGE"
+  - docker build --build-arg BEATS_VERSION="${BEATS_VERSION}" --tag "${IMAGE}" .
+  - docker push "${IMAGE}"
 
 after_script:
   - docker images
