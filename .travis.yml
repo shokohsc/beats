@@ -44,6 +44,7 @@ script:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - docker run --rm -v $(pwd):/build -e BEATS=$BEATS -e BEATS_VERSION=$BEATS_VERSION -e GOARM=$GOARM -e GOARCH=$GOARCH $BUILDER_IMAGE
   - tar -xzf "filebeat-$BEATS_VERSION-linux-arm7.tar.gz"
+  - sudo chmod +x filebeat
   - sudo mv filebeat filebeat-$BEATS_VERSION-linux-x86/
   - sudo mv filebeat-$BEATS_VERSION-linux-x86 filebeat
   - ls -lah
